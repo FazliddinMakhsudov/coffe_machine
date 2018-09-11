@@ -3,7 +3,7 @@ package coffe_machine.component;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Coffee implements Comparable<Coffee>{
+public class Coffee implements Comparable<Coffee>{
 	private String name;
 	private int price;
 	private int totalPrice;
@@ -17,31 +17,20 @@ public abstract class Coffee implements Comparable<Coffee>{
 	public int getTotalPrice() {
 		return totalPrice;
 	}
+	
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public Coffee(String name, int price) {
 		this.name = name;
 		this.price = price;
 		this.ingredients = new ArrayList<>();
-		this.totalPrice = this.countTotalPrice();
+		this.totalPrice = price;
 	}
-	public void addIngredient(Ingredient ingredient){
-		this.ingredients.add(ingredient);
-		this.totalPrice=this.countTotalPrice();
-	}
-	public boolean removeIngredient(Ingredient ingredient){
-		if(!this.ingredients.contains(ingredient)){
-			return false;
-		}
-		this.ingredients.remove(ingredient);
-		this.totalPrice=this.countTotalPrice();
-		return true;
-	}
-	private int countTotalPrice (){
-		int ingredientPrices =0;
-		for(Ingredient ing : this.ingredients){
-			ingredientPrices+=ing.getPrice();
-		}
-		return this.price+ingredientPrices;
-	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

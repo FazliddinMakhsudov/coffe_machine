@@ -13,6 +13,7 @@ import coffe_machine.component.Late;
 import coffe_machine.component.Lyuvak;
 import coffe_machine.component.Milk;
 import coffe_machine.component.Sugar;
+import coffe_machine.maker.CoffeeMaker;
 import coffe_machine.viewer.CoffeeEnum;
 import coffe_machine.viewer.Show;
 
@@ -156,6 +157,8 @@ public class Controller {
 	private static Coffee putIngredient(Coffee coffee){
 		Ingredient ingredient;
 		Show.actionsPutIngredient();
+		CoffeeMaker cm = new CoffeeMaker();
+		cm.setCoffee(coffee);
 		int choic= scan.nextInt();
 		while(choic!=2){
 			Show.showAvailableIngredient();
@@ -173,13 +176,13 @@ public class Controller {
 					break;
 			}
 			if(ingredient!=null){
-				coffee.addIngredient(ingredient);
+				cm.addIngredient(ingredient);
 			} else{
 				Show.wrongValue();
 			}
 			Show.actionsPutIngredient();
 			choic= scan.nextInt();
 		}
-		return coffee;
+		return cm.getCoffee();
 	}
 }
