@@ -10,32 +10,19 @@ public class CoffeeMachine {
 		return drinks;
 	}
 	public static void addCoffee (Coffee coffee){
-		Coffee temp = null;
-		for(Coffee cofee: drinks.keySet()){
-			if(cofee.getName().equals(coffee.getName())){
-				temp=cofee;
-				break;
-			}
-		}
-		if(temp!=null){
-			Integer num = drinks.get(temp)+1;
-			drinks.put(temp, num);
+		if(drinks.containsKey(coffee)){
+			Integer num = drinks.get(coffee)+1;
+			drinks.put(coffee, num);
 		} else {
 			drinks.put(coffee, 1);
 		}
 	}
 	public static boolean takeCoffee (Coffee coffee){
-		Coffee temp = null;
-		for(Coffee cofee: drinks.keySet()){
-			if(cofee.getName().equals(coffee.getName())){
-				temp=cofee;
-				break;
-			}
-		}
-		if(temp!=null){
-			Integer num = drinks.get(temp)-1;
+	
+		if(drinks.getOrDefault(coffee, -1)!=-1){
+			Integer num = drinks.get(coffee)-1;
 			if(num>0){
-				drinks.put(temp, num);	
+				drinks.put(coffee, num);	
 			} else{
 				drinks.remove(coffee);
 			}
