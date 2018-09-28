@@ -10,22 +10,15 @@ public class CoffeeMachine {
 		return drinks;
 	}
 	public static void addCoffee (Coffee coffee){
-		if(drinks.containsKey(coffee)){
-			Integer num = drinks.get(coffee)+1;
-			drinks.put(coffee, num);
-		} else {
-			drinks.put(coffee, 1);
-		}
+			drinks.put(coffee, drinks.getOrDefault(coffee, 0)+1);
 	}
 	public static boolean takeCoffee (Coffee coffee){
-	
-		if(drinks.getOrDefault(coffee, -1)!=-1){
-			Integer num = drinks.get(coffee)-1;
-			if(num>0){
-				drinks.put(coffee, num);	
+		if(drinks.containsKey(coffee)){
+			if(drinks.getOrDefault(coffee, 1)!=1){
+				drinks.put(coffee, drinks.get(coffee)-1);
 			} else{
 				drinks.remove(coffee);
-			}
+			}			
 			return true;
 		} else {
 			return false;
